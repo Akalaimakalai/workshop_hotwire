@@ -4,7 +4,7 @@
     <%= render tracks, enqueueble: true %>
     <li class="track">
       <span class="track--number"></span>
-        <% if tracks.size < 20 %>
+        <% if tracks.size < 6 %>
           <%= link_to 'Load more', artist_path(artist, tracks_number: tracks.size), class:"btn btn-success", data: {"turbo-frame" => "_self", "turbo-action" => "advance"} %>
         <% end %>
       </a>

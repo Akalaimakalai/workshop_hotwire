@@ -5,9 +5,9 @@ class ArtistsController < ApplicationController
     tracks = artist.tracks.popularity_ordered.limit(select_limit(params[:tracks_number]))
 
     if turbo_frame_request?
-      if params[:tracks_number].present?
+      if turbo_frame_request_id == "tracks"
         render partial: "tracks", locals: {artist:, tracks:}
-      else
+      elsif turbo_frame_request_id.match?("discography")
         render partial: "discography", locals: {artist:, albums:}
       end
     else
@@ -27,7 +27,5 @@ class ArtistsController < ApplicationController
 
   def select_limit(tracks_number)
     tracks_count = tracks_number.to_i + 5
-
-    tracks_count > 20 ? 20 : tracks_count
   end
 end
